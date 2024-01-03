@@ -25,3 +25,21 @@
 	    if(dp[M-1][V] != 1e9) return dp[M-1][V];
 	    else return -1;
 	} 
+
+
+//Memoization
+
+int mincoins(vector<int>&coins,int indx,int T,vector<vector<int>>&dp){
+		if(indx==0){
+			if(T%a[0]==0) return T/a[0];
+			return INT_MAX;
+		}
+		if(dp[indx][T] != -1) return dp[indx][T];
+		int nt = f(coins,indx-1,T,dp);
+		int tk = INT_MAX;
+		if(coins[indx] <= T){
+			tk = 1 + f(coins,indx,T-coins[indx],dp);
+		}
+		dp[indx][T] = min(tk,nt);
+	return dp[indx][T];
+}
